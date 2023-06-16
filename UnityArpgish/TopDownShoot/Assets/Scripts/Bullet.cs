@@ -14,8 +14,8 @@ Bullet class and prefab
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
-    private float speed = 3f;
-    private float deathTimerStartValue = 2f;
+    private float speed = 3;
+    private float deathTimerStartValue = 1;
     private float deathTimer;
     Rigidbody rbody;
 
@@ -38,12 +38,11 @@ public class Bullet : MonoBehaviour
         {
             Die();
         }
-        rbody.AddForce(gameObject.transform.forward * speed, ForceMode.Force);
+        rbody.AddForce(gameObject.transform.forward * speed, ForceMode.Impulse);
     }
 
     private void Die()
     {
-        Debug.Log("I died!");
         gameObject.SetActive(false);
     }
 

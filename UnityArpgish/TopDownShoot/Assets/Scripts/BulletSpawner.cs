@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
+    [SerializeField]
     GameObject bulletPrefab;
     float timeBetweenSpawns = 1f;
     float timer = 0;
