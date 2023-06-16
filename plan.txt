@@ -1,0 +1,7 @@
+Bullet prefab
+- instantiate bullet facing direction want it to shoot.
+- bullet moves in direction it is facing every physics tick
+- bullet dies when 
+	- collides with something
+	- die timer reaches 0
+- applies damage to damageable on collision with damageable
