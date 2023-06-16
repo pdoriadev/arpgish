@@ -1,7 +1,14 @@
-Bullet prefab
-- instantiate bullet facing direction want it to shoot.
+Bullet class and prefab
 - bullet moves in direction it is facing every physics tick
 - bullet dies when 
 	- collides with something
 	- die timer reaches 0
 - applies damage to damageable on collision with damageable
+
+Damageable class
+- has health. Can take damage from things. If health hits 0, it dies. 
+
+Bullet Spawner class
+- spawns bullet prefabs on timer
+
+
