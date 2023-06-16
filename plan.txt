@@ -1,3 +1,13 @@
-
+RadialBulletSpawner
+- Spawns Bullets that fire rotated around the spawner
+	- Cone mode - fires X evenly spaced bullets around the spawner within a certain radius
+		- TC 1 bullet
+		- TC 3 bullet
+		- TC 8 bullet
+	- Radial mode - fires X evenly spaced bullets around the spawner
+		- TC 1 bullet		
+		- Test cases 8 bullets around
+		- Test case 4 bullets around
+ 
 
 
