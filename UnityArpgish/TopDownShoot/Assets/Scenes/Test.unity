@@ -604,6 +604,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2337783394748502746, guid: eab7e60753748c34098dbc3cdd430758, type: 3}
+      propertyPath: numOfBullets
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2337783394748502746, guid: eab7e60753748c34098dbc3cdd430758, type: 3}
+      propertyPath: timeBetweenSpawns
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048795795853572176, guid: eab7e60753748c34098dbc3cdd430758, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2006842
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048795795853572176, guid: eab7e60753748c34098dbc3cdd430758, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1319656
+      objectReference: {fileID: 0}
     - target: {fileID: 3048795795853572176, guid: eab7e60753748c34098dbc3cdd430758, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068

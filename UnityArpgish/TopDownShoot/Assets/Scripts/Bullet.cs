@@ -14,7 +14,7 @@ Bullet class and prefab
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
-    private float speed = 3;
+    private float speed = 6;
     private float deathTimerStartValue = 1;
     private float deathTimer;
     Rigidbody rbody;
