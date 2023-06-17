@@ -42,23 +42,33 @@ public class BulletSpawner : MonoBehaviour
 
         if (bulletShot == BulletShotType.Cone)
         {
-            Vector3 firingDir = transform.forward;
-            float rotationPerBullet = Mathf.Deg2Rad * (360 / numOfBullets);
-            for (int i = 0; i < numOfBullets; i++)
-            {
-                if (i < numOfBullets / 2)
-                {
-                    Vector3.RotateTowards(firingDir, -transform.forward, rotationPerBullet, 0);
-                    continue;
-                }
-                
-                Vector3.RotateTowards(firingDir, transform.forward, rotationPerBullet, 0);
-            }
+
             return;
         }
 
         if (bulletShot == BulletShotType.Radial)
         {
+            Vector3 firingDir = transform.forward;
+            Quaternion bulletRotation = transform.rotation; 
+            float rotationAroundPerBullet = 360 / numOfBullets;
+
+            Instantiate(bulletPrefab, transform.position + (firingDir * 3), bulletRotation);
+
+            for (int i = 1; i < numOfBullets; i++)
+            {
+                float sin = Mathf.Sin(rotationAroundPerBullet * Mathf.Deg2Rad);
+                float cos = Mathf.Cos(rotationAroundPerBullet * Mathf.Deg2Rad);
+
+                float tx = firingDir.x;
+                float ty = firingDir.y;
+                firingDir.x = (cos * tx) - (sin * ty);
+                firingDir.y = (sin * tx) + (cos * ty);
+
+                bulletRotation = Quaternion.Euler(bulletRotation.eulerAngles.x, bulletRotation.eulerAngles.y + rotationAroundPerBullet, bulletRotation.eulerAngles.z);
+
+                Instantiate(bulletPrefab, transform.position + (firingDir * 3), bulletRotation);
+            }
+
             return;
         }
 
