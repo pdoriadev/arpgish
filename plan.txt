@@ -7,8 +7,6 @@ BulletSpawner modes
 	- TC 1 bullet		
 	- Test cases 8 bullets around
 	- Test case 4 bullets around
-- Normal mode
-	- fires x bullets in an evenly spaced burst in front of the spawner
  
 
 
