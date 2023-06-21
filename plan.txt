@@ -1,6 +1,21 @@
 - AI Agent move
 - AI Agent move to target
+- AI Agent avoid other AI agents while moving to target
 - AI Agent follow moving target
+- AI Agent melee attack
+- AI Agent ranged attack
+- AI Agent move while firing at player 
+
+
+- AI state machine? behavior tree?
+	- aggro
+		- Different agent behavior 
+	- idle
+	- Flee
+
+- AI model
+- AI animation for different behavior states
+- AI 
 
 ================================== for later
 BulletSpawner modes
