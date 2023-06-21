@@ -1,3 +1,8 @@
+- AI Agent move
+- AI Agent move to target
+- AI Agent follow moving target
+
+================================== for later
 BulletSpawner modes
 - Cone mode - fires X evenly spaced bullets around the spawner within a certain radius
 	- TC 1 bullet
