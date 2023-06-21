@@ -1,8 +1,8 @@
-- AI Agent avoid other AI agents while moving to target
 - AI Agent melee attack
 - AI Agent ranged attack
 - AI Agent move while firing at player 
 - AI avoids obstacles
+- AI Agent avoid other AI agents while moving to target
 - AI testing with water / high cost movement areas
 - AI testing with damaging areas??
 
