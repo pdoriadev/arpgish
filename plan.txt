@@ -1,6 +1,4 @@
-- AI Agent move to entity
 - AI Agent avoid other AI agents while moving to target
-- AI Agent follow moving target
 - AI Agent melee attack
 - AI Agent ranged attack
 - AI Agent move while firing at player 
