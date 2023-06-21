@@ -12,12 +12,20 @@ public enum EnemyAIState
 public class EnemyAI : MonoBehaviour, AIAlertable
 {
 
-    public float meleeRange = 1.5f;
+    public float closestMeleeRange = 1.5f;
+    public float maxMeleeRange = 2f;
+
+    [SerializeField]
+    GameObject attackBall;
 
     NavMeshAgent agent;
     Vector3 lastPosition;
     EnemyAIState enemyState = EnemyAIState.IDLE;
     List<Transform> alerterList = new List<Transform>();
+    bool isAttacking = false;
+    float attacksPerSecond = 0.3f;
+    float timeSinceLastAttack = 0f;
+    
 
     private void Awake()
     {
@@ -28,6 +36,7 @@ public class EnemyAI : MonoBehaviour, AIAlertable
 
     private void FixedUpdate()
     {
+        timeSinceLastAttack += Time.fixedDeltaTime;
         if (enemyState == EnemyAIState.IDLE)
         {
             if (alerterList.Count > 0)
@@ -40,12 +49,7 @@ public class EnemyAI : MonoBehaviour, AIAlertable
             enemyState = EnemyAIState.IDLE;
         }
 
-
         Move();
-
-
-
-
     }
 
     void Move()
@@ -65,10 +69,30 @@ public class EnemyAI : MonoBehaviour, AIAlertable
 
         if (enemyState == EnemyAIState.AGGRO)
         {
-            Vector3 newDest = alerterList[0].position + (transform.position - alerterList[0].position).normalized * meleeRange;
-            agent.destination = newDest;
+            Vector3 enemyToPlayer = (transform.position - alerterList[0].position);
+            if (enemyToPlayer.magnitude < maxMeleeRange && !isAttacking && timeSinceLastAttack > 1/attacksPerSecond)
+            {
+                StartCoroutine( AttackCo());
+            }
+            else
+            {
+                Vector3 newDest = alerterList[0].position + enemyToPlayer.normalized * closestMeleeRange;
+                agent.destination = newDest;
+            }
         }
-
+    }
+    
+    IEnumerator AttackCo()
+    {
+        isAttacking = true;
+        while (isAttacking)
+        {
+            attackBall.SetActive(true);
+            yield return null;
+            attackBall.SetActive(false);
+            isAttacking = false;
+            timeSinceLastAttack = 0;
+        }
     }
 
     public void RequestAlert(Transform alerterTransform)

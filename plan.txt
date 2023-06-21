@@ -1,4 +1,3 @@
-- AI Agent melee attack
 - AI Agent ranged attack
 - AI Agent move while firing at player 
 - AI avoids obstacles
