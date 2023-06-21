@@ -1,5 +1,4 @@
-- AI Agent move
-- AI Agent move to target
+- AI Agent move to entity
 - AI Agent avoid other AI agents while moving to target
 - AI Agent follow moving target
 - AI Agent melee attack
