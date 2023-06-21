@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface AIAlertable 
 {
-    bool RequestAlert();
-    bool RequestSilence();
+    void RequestAlert(Transform alertersTransform);
+    void RequestSilence(Transform alertersTransform);
 }

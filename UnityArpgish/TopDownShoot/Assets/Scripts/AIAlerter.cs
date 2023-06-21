@@ -5,12 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class AIAlerter : MonoBehaviour
 {
+
     private void OnTriggerEnter(Collider other)
     {
         AIAlertable alertable = other.GetComponent<AIAlertable>();
         if (other.GetComponent<AIAlertable>() != null)
         {
-            alertable.RequestAlert();
+            alertable.RequestAlert(transform);
+            return;
         }
     }
 
@@ -19,7 +21,7 @@ public class AIAlerter : MonoBehaviour
         AIAlertable alertable = other.GetComponent<AIAlertable>();
         if (other.GetComponent<AIAlertable>() != null)
         {
-            alertable.RequestSilence();
+            alertable.RequestSilence(transform);
         }
     }
 }
