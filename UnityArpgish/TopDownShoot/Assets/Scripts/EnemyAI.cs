@@ -8,15 +8,16 @@ public enum EnemyAIState
     AGGRO
 }
 
+
 public class EnemyAI : MonoBehaviour, AIAlertable
 {
-    
+
+    public float meleeRange = 1.5f;
+
     NavMeshAgent agent;
     Vector3 lastPosition;
     EnemyAIState enemyState = EnemyAIState.IDLE;
-    List<Transform> alertersList = new List<Transform>();
-
-    float timeLastReachedDestinationWhenIdle;
+    List<Transform> alerterList = new List<Transform>();
 
     private void Awake()
     {
@@ -29,19 +30,20 @@ public class EnemyAI : MonoBehaviour, AIAlertable
     {
         if (enemyState == EnemyAIState.IDLE)
         {
-            if (alertersList.Count > 0)
+            if (alerterList.Count > 0)
             {
                 enemyState = EnemyAIState.AGGRO;
             }
         }
-        else if (alertersList.Count == 0)
+        else if (alerterList.Count == 0)
         {
             enemyState = EnemyAIState.IDLE;
         }
 
+
         Move();
-      
-        
+
+
 
 
     }
@@ -63,7 +65,8 @@ public class EnemyAI : MonoBehaviour, AIAlertable
 
         if (enemyState == EnemyAIState.AGGRO)
         {
-            agent.destination = alertersList[0].position;
+            Vector3 newDest = alerterList[0].position + (transform.position - alerterList[0].position).normalized * meleeRange;
+            agent.destination = newDest;
         }
 
     }
@@ -72,7 +75,7 @@ public class EnemyAI : MonoBehaviour, AIAlertable
     {
         if (alerterTransform != null)
         {
-            alertersList.Add(alerterTransform);
+            alerterList.Add(alerterTransform);
             return;
         }
 
@@ -84,7 +87,7 @@ public class EnemyAI : MonoBehaviour, AIAlertable
     {
         if (alerterTransform != null)
         {
-            alertersList.Remove(alerterTransform);
+            alerterList.Remove(alerterTransform);
             return;
         }
 
