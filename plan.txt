@@ -5,7 +5,9 @@
 - AI Agent melee attack
 - AI Agent ranged attack
 - AI Agent move while firing at player 
-
+- AI avoids obstacles
+- AI testing with water / high cost movement areas
+- AI testing with damaging areas??
 
 - AI state machine? behavior tree?
 	- aggro
@@ -15,7 +17,7 @@
 
 - AI model
 - AI animation for different behavior states
-- AI 
+- AI animation blending??
 
 ================================== for later
 BulletSpawner modes
