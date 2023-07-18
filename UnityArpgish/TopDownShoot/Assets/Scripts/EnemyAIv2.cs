@@ -79,21 +79,21 @@ public class EnemyAIv2 : MonoBehaviour
             attackData attData = melee.getAttackData();
             if (attData.isAttacking == false)
             {
-                if (toAlerter.magnitude > attData.closestMeleeRange)
+                if (toAlerter.magnitude > attData.minAttackRange)
                 {
                     Vector3 targetToEnemy = transform.position - target.position;
-                    Vector3 newDest = target.position + targetToEnemy.normalized * melee.getAttackData().closestMeleeRange;
+                    Vector3 newDest = target.position + targetToEnemy.normalized * melee.getAttackData().minAttackRange;
                     agent.destination = newDest;
                 }
 
-                if (toAlerter.magnitude < attData.maxMeleeRange)
+                if (toAlerter.magnitude < attData.maxAttackRange)
                 {
                     melee.RequestAttack();
                 }
             }
             else
             {
-                if (toAlerter.magnitude > attData.maxMeleeRange)
+                if (toAlerter.magnitude > attData.maxAttackRange)
                 {
                     melee.RequestStopAttack();
                 }
