@@ -7,12 +7,12 @@ using UnityEngine.AI;
 
 
 [RequireComponent(typeof(Alertable))]
-[RequireComponent(typeof(MeleeAttacker))]
+[RequireComponent(typeof(Attacker))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAIv2 : MonoBehaviour
 {
     Alertable alertable;
-    MeleeAttacker melee;
+    Attacker attacker;
 
     NavMeshAgent agent;
     Vector3 lastPosition;
@@ -26,8 +26,8 @@ public class EnemyAIv2 : MonoBehaviour
         {
             Debug.LogError("Missing Alertable component");
         }
-        melee = GetComponent<MeleeAttacker>();
-        if (melee == null)
+        attacker = GetComponent<Attacker>();
+        if (attacker == null)
         {
             Debug.LogError("Missing MeleeAttacker component");
         }
@@ -76,26 +76,26 @@ public class EnemyAIv2 : MonoBehaviour
         else if (enemyState == EnemyAIState.AGGRO && target != null)
         {
             Vector3 toAlerter = target.position - transform.position;
-            attackData attData = melee.getAttackData();
-            if (attData.isAttacking == false)
+            attackData attData = attacker.getAttackData();
+            if (attData.attackActive == false)
             {
                 if (toAlerter.magnitude > attData.minAttackRange)
                 {
                     Vector3 targetToEnemy = transform.position - target.position;
-                    Vector3 newDest = target.position + targetToEnemy.normalized * melee.getAttackData().minAttackRange;
+                    Vector3 newDest = target.position + targetToEnemy.normalized * attacker.getAttackData().minAttackRange;
                     agent.destination = newDest;
                 }
 
                 if (toAlerter.magnitude < attData.maxAttackRange)
                 {
-                    melee.RequestAttack();
+                    attacker.RequestAttack();
                 }
             }
             else
             {
                 if (toAlerter.magnitude > attData.maxAttackRange)
                 {
-                    melee.RequestStopAttack();
+                    attacker.RequestStopAttack();
                 }
             }
         }

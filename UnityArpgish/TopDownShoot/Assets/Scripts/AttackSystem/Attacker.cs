@@ -7,16 +7,17 @@ public struct attackData
 {
     public float attackSpeed, minAttackRange, maxAttackRange, timeLastAttackAttempted, timeLastAttackEnded;
     public int attackDamage;
-    public bool isAttacking;
+    public bool attackCo, attackActive;
 
     public attackData(float _speed, float _minAttackRange, float _maxAttackRange, 
-            int _damage, bool _isAttacking, float _timeLastAttackAttempted, float _timeSinceAttackEnded)
+            int _damage, bool _attackCo, bool _attackActive, float _timeLastAttackAttempted, float _timeSinceAttackEnded)
     {
         attackSpeed = _speed;
         minAttackRange = _minAttackRange;
         maxAttackRange = _maxAttackRange;
         attackDamage = _damage;
-        isAttacking = _isAttacking;
+        attackCo = _attackCo;
+        attackActive = _attackActive;
         timeLastAttackAttempted = _timeLastAttackAttempted;
         timeLastAttackEnded = _timeSinceAttackEnded;
     }
@@ -30,7 +31,7 @@ public class Attacker : MonoBehaviour
     [SerializeField]
     float attackSpeed = 1f, closestMeleeRange = 1.5f, maxMeleeRange = 2f, attackTime = 0.3f;
 
-    bool isAttacking = false;
+    bool attackCo = false, attackActive = false;
     float timeLastAttackAttempted = 0f, timeLastAttackEnded = 0f;
 
     [SerializeField]
@@ -38,21 +39,23 @@ public class Attacker : MonoBehaviour
     
     public attackData getAttackData()
     {
-        return new attackData(attackSpeed, closestMeleeRange, maxMeleeRange, attackDamage, isAttacking, timeLastAttackAttempted, timeLastAttackEnded);
+        return new attackData(attackSpeed, closestMeleeRange, maxMeleeRange, attackDamage, attackCo, attackActive, timeLastAttackAttempted, timeLastAttackEnded);
     }
 
     public void RequestAttack()
     {
-        if (isAttacking == false)
+        if (attackCo == false)
         {
+            attackCo = true;
             StartCoroutine(AttackCo());
         }
     }
 
     public void RequestStopAttack()
     {
-        if (isAttacking)
+        if (attackCo)
         {
+            attackCo = false;
             StopCoroutine(AttackCo());
             StopAttack();
         }
@@ -60,15 +63,15 @@ public class Attacker : MonoBehaviour
 
     IEnumerator AttackCo()
     {
-        Attack();
+        StartAttack();
         yield return new WaitForSeconds(1 / attackTime);
         StopAttack();
         yield return new WaitForSeconds(1 / attackSpeed);
     }
 
-    void Attack()
+    void StartAttack()
     {
-        isAttacking = true;
+        attackActive = true;
         attackBall.SetActive(true);
         timeLastAttackAttempted = Time.time;
     }
@@ -76,7 +79,7 @@ public class Attacker : MonoBehaviour
     void StopAttack()
     {
         attackBall.SetActive(false);
-        isAttacking = false;
+        attackActive = false;
         timeLastAttackEnded = Time.time;
     }
 }

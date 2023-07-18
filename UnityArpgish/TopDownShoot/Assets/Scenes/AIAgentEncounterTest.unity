@@ -138,8 +138,8 @@ GameObject:
   - component: {fileID: 6962329}
   - component: {fileID: 6962328}
   - component: {fileID: 6962335}
-  - component: {fileID: 6962334}
-  - component: {fileID: 6962333}
+  - component: {fileID: 6962338}
+  - component: {fileID: 6962337}
   m_Layer: 6
   m_Name: AIEnemy2
   m_TagString: Untagged
@@ -243,35 +243,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6962333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6962327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5c26808f8033b42af1b8812adf0281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6962334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6962327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68a894de31faf144a839427afbe96bc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 1
-  attackSpeed: 1
-  closestMeleeRange: 1.5
-  maxMeleeRange: 2
-  attackBall: {fileID: 1563087809}
 --- !u!114 &6962335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +278,36 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6962337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5c26808f8033b42af1b8812adf0281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6962338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3827ab3ebe2c9f1408d3b601a7011cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 1
+  attackSpeed: 1
+  closestMeleeRange: 1.5
+  maxMeleeRange: 2
+  attackTime: 0.3
+  attackBall: {fileID: 1563087809}
 --- !u!1 &145498413
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b3594d95051374e9e5777111f51fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
 --- !u!54 &145498421
 Rigidbody:
   m_ObjectHideFlags: 0
