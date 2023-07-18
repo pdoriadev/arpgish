@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
+    [SerializeField]
     int health = 3;
     
     public void ApplyDamageRequest(int damageAmount)

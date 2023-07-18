@@ -8,8 +8,7 @@ public enum EnemyAIState
     AGGRO
 }
 
-
-public class EnemyAI : MonoBehaviour, AIAlertable
+public class EnemyAI : MonoBehaviour, IAlertable
 {
 
     public float closestMeleeRange = 1.5f;

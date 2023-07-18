@@ -8,8 +8,8 @@ public class AIAlerter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AIAlertable alertable = other.GetComponent<AIAlertable>();
-        if (other.GetComponent<AIAlertable>() != null)
+        IAlertable alertable = other.GetComponent<IAlertable>();
+        if (other.GetComponent<IAlertable>() != null)
         {
             alertable.RequestAlert(transform);
             return;
@@ -18,8 +18,8 @@ public class AIAlerter : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        AIAlertable alertable = other.GetComponent<AIAlertable>();
-        if (other.GetComponent<AIAlertable>() != null)
+        IAlertable alertable = other.GetComponent<IAlertable>();
+        if (other.GetComponent<IAlertable>() != null)
         {
             alertable.RequestSilence(transform);
         }
