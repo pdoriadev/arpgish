@@ -1,30 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-public struct attackData
-{
-    public float attackSpeed, minAttackRange, maxAttackRange, timeLastAttackAttempted, timeLastAttackEnded;
-    public int attackDamage;
-    public bool attackCo, attackActive;
-
-    public attackData(float _speed, float _minAttackRange, float _maxAttackRange, 
-            int _damage, bool _attackCo, bool _attackActive, float _timeLastAttackAttempted, float _timeSinceAttackEnded)
-    {
-        attackSpeed = _speed;
-        minAttackRange = _minAttackRange;
-        maxAttackRange = _maxAttackRange;
-        attackDamage = _damage;
-        attackCo = _attackCo;
-        attackActive = _attackActive;
-        timeLastAttackAttempted = _timeLastAttackAttempted;
-        timeLastAttackEnded = _timeSinceAttackEnded;
-    }
-}
-
-
-public class Attacker : MonoBehaviour
+public class MeleeAttack : IAttackController
 {
     [SerializeField]
     int attackDamage = 1;
@@ -37,12 +14,12 @@ public class Attacker : MonoBehaviour
     [SerializeField]
     GameObject attackBall;
     
-    public attackData getAttackData()
+    public override attackData getAttackData()
     {
         return new attackData(attackSpeed, closestMeleeRange, maxMeleeRange, attackDamage, attackCo, attackActive, timeLastAttackAttempted, timeLastAttackEnded);
     }
 
-    public void RequestAttack()
+    public override void RequestStartAttack()
     {
         if (attackCo == false)
         {
@@ -51,7 +28,7 @@ public class Attacker : MonoBehaviour
         }
     }
 
-    public void RequestStopAttack()
+    public override void RequestStopAttack()
     {
         if (attackCo)
         {
@@ -61,7 +38,7 @@ public class Attacker : MonoBehaviour
         }
     }
 
-    IEnumerator AttackCo()
+    protected override IEnumerator AttackCo()
     {
         StartAttack();
         yield return new WaitForSeconds(1 / attackTime);
@@ -69,14 +46,14 @@ public class Attacker : MonoBehaviour
         yield return new WaitForSeconds(1 / attackSpeed);
     }
 
-    void StartAttack()
+    protected override void StartAttack()
     {
         attackActive = true;
         attackBall.SetActive(true);
         timeLastAttackAttempted = Time.time;
     }
 
-    void StopAttack()
+    protected override void StopAttack()
     {
         attackBall.SetActive(false);
         attackActive = false;

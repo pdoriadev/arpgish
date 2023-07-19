@@ -7,12 +7,12 @@ using UnityEngine.AI;
 
 
 [RequireComponent(typeof(Alertable))]
-[RequireComponent(typeof(Attacker))]
+[RequireComponent(typeof(IAttackController))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAIv2 : MonoBehaviour
 {
     Alertable alertable;
-    Attacker attacker;
+    IAttackController attacker;
 
     NavMeshAgent agent;
     Vector3 lastPosition;
@@ -36,8 +36,6 @@ public class EnemyAIv2 : MonoBehaviour
         {
             Debug.LogError("Missing NavMeshAgent component");
         }
-
-        
     }
 
     void Update()
@@ -60,7 +58,6 @@ public class EnemyAIv2 : MonoBehaviour
         }
 
         Move();
-
     }
 
     void Move()
@@ -88,7 +85,7 @@ public class EnemyAIv2 : MonoBehaviour
 
                 if (toAlerter.magnitude < attData.maxAttackRange)
                 {
-                    attacker.RequestAttack();
+                    attacker.RequestStartAttack();
                 }
             }
             else
