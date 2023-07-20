@@ -2,22 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct attackData
+[System.Serializable]
+public class attackData
 {
-    public float attackSpeed, minAttackRange, maxAttackRange, timeLastAttackAttempted, timeLastAttackEnded;
-    public int attackDamage;
-    public bool attackCo, attackActive;
+    public float attPerSec, attTime, minAttRange, maxAttRange, timeLastAttStarted, timeLastAttackEnded;
+    public int damage;
+    public bool attackCoroutineActive, attActive;
+
+    public attackData()
+    {
+        attPerSec = 1f;
+        attTime = 0.5f;
+        minAttRange = 1f;
+        maxAttRange = 2f;
+        timeLastAttStarted = 0f;
+        timeLastAttackEnded = 0f;
+
+        damage = 1;
+
+        attackCoroutineActive = false;
+        attActive = false;
+    }
 
     public attackData(float _speed, float _minAttackRange, float _maxAttackRange,
             int _damage, bool _attackCo, bool _attackActive, float _timeLastAttackAttempted, float _timeLastAttackEnded)
     {
-        attackSpeed = _speed;
-        minAttackRange = _minAttackRange;
-        maxAttackRange = _maxAttackRange;
-        attackDamage = _damage;
-        attackCo = _attackCo;
-        attackActive = _attackActive;
-        timeLastAttackAttempted = _timeLastAttackAttempted;
+        attPerSec = _speed;
+        minAttRange = _minAttackRange;
+        maxAttRange = _maxAttackRange;
+        damage = _damage;
+        attackCoroutineActive = _attackCo;
+        attActive = _attackActive;
+        timeLastAttStarted = _timeLastAttackAttempted;
         timeLastAttackEnded = _timeLastAttackEnded;
     }
 }

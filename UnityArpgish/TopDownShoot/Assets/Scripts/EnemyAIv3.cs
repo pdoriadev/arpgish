@@ -2,22 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-/*
-*/
-
 
 [RequireComponent(typeof(Alertable))]
-[RequireComponent(typeof(IAttackController))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyAIv2 : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class EnemyAIv3 : MonoBehaviour
 {
     Alertable alertable;
-    List<IAttackController> attacks = new List<IAttackController>();
-
     NavMeshAgent agent;
+
     Vector3 lastPosition;
     Transform target;
+
     EnemyAIState enemyState = EnemyAIState.IDLE;
+
+    [SerializeField]
+    attackData attDat;
+    [SerializeField]
+    GameObject attBall;
 
     private void Awake()
     {
@@ -25,16 +27,6 @@ public class EnemyAIv2 : MonoBehaviour
         if (alertable == null)
         {
             Debug.LogError("Missing Alertable component");
-        }
-
-        IAttackController[] cArr = GetComponents<IAttackController>();
-        foreach(IAttackController c in cArr)
-        {
-            attacks.Add(c);
-        }
-        if (attacks.Count == 0)
-        {
-            Debug.LogError("Missing IAttackController component(s)");
         }
 
         agent = GetComponent<NavMeshAgent>();
@@ -79,30 +71,71 @@ public class EnemyAIv2 : MonoBehaviour
         else if (enemyState == EnemyAIState.AGGRO && target != null)
         {
             Vector3 toAlerter = target.position - transform.position;
-            attackData attDat = attacks[0].getAttackData();
             if (attDat.attActive == false)
             {
                 if (toAlerter.magnitude > attDat.minAttRange)
                 {
                     Vector3 targetToEnemy = transform.position - target.position;
-                    Vector3 newDest = target.position + targetToEnemy.normalized * attacks[0].getAttackData().minAttRange;
+                    Vector3 newDest = target.position + targetToEnemy.normalized * attDat.minAttRange;
                     agent.destination = newDest;
                 }
 
                 if (toAlerter.magnitude < attDat.maxAttRange)
                 {
-                    attacks[0].RequestStartAttack();
+                    RequestStartAttack();
                 }
             }
             else
             {
                 if (toAlerter.magnitude > attDat.maxAttRange)
                 {
-                    attacks[0].RequestStopAttack();
+                    RequestStopAttack();
                 }
             }
         }
 
         lastPosition = transform.position;
+    }
+
+    void RequestStartAttack()
+    {
+        if (attDat.attackCoroutineActive == false)
+        {
+            attDat.attackCoroutineActive = true;
+            StartCoroutine(AttackCo());
+        }
+    }
+
+    void RequestStopAttack()
+    {
+        if (attDat.attackCoroutineActive)
+        {
+            attDat.attackCoroutineActive = false;
+            StopCoroutine(AttackCo());
+            StopAttack();
+        }
+    }
+
+    protected IEnumerator AttackCo()
+    {
+        StartAttack();
+        yield return new WaitForSeconds(1 / attDat.attTime);
+        StopAttack();
+        yield return new WaitForSeconds(1 / attDat.attPerSec);
+
+    }
+
+    void StartAttack()
+    {
+        attDat.attActive = true;
+        attBall.SetActive(true);
+        attDat.timeLastAttStarted = Time.time;
+    }
+
+    void StopAttack()
+    {
+        attBall.SetActive(false);
+        attDat.attActive = false;
+        attDat.timeLastAttackEnded = Time.time;
     }
 }

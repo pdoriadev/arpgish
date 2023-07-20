@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RangedAttack : IAttackController
 {
+    
+    attackData attDat;
+
     [SerializeField]
     float attackSpeed, minAttackRange, maxAttackRange, timeLastAttackAttempted, timeLastAttackEnded;
     [SerializeField]

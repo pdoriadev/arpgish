@@ -44,6 +44,7 @@ public class MeleeAttack : IAttackController
         yield return new WaitForSeconds(1 / attackTime);
         StopAttack();
         yield return new WaitForSeconds(1 / attackSpeed);
+
     }
 
     protected override void StartAttack()
